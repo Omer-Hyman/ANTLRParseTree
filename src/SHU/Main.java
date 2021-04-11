@@ -38,33 +38,33 @@ public class Main {
         {
             System.out.println("Usage: java pdl.pdl <source>");
         }
-        System.out.println("Would you like to search for a node? Answer Y/N.");
-        Scanner scanner = new Scanner(System.in);
-        String userInput = scanner.next();
 
-        while(userInput.equals("y")) {
+        String userInput = "y";
+
+        do {
+            System.out.println("Would you like to search the tree? Answer Y/N.");
+            Scanner scanner = new Scanner(System.in);
+            userInput = scanner.next();
+
             switch (userInput) {
                 case "y" -> {
+                    System.out.println("Would you like to;\n (1)search a node\n (2)a node's contents\n (3)or both?\n ANSWER WITH 1,2 OR 3!");
+                    scanner = new Scanner(System.in);
+                    int userInput2 = scanner.nextInt();
+
                     System.out.println("Input a node you would like to search for!");
                     scanner = new Scanner(System.in);
-                    String userInput2 = scanner.nextLine();
-                    String nodeFind = worker.FindNode(userInput2);
-                    if (nodeFind != null)
-                        System.out.println( nodeFind);
-                    else
-                        System.err.println("NODE NOT FOUND!");
+                    String userInput3 = scanner.nextLine();
+
+                    worker.FindNode(userInput3, userInput2);
+
                 }
                 case "n" -> System.out.println("OK, I won't search the tree!");
                 default -> System.out.println("Tree not searched");
             }
-            System.out.println("Would you like to search for a node? Answer Y/N.");
-            scanner = new Scanner(System.in);
-            userInput = scanner.next();
-        }
+        }while(userInput.equals("y"));
 
     }
-
-
 
 }
 

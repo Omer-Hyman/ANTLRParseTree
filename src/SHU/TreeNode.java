@@ -3,15 +3,26 @@ package SHU;
 import java.util.Stack;
 
 public class TreeNode {
-    private String nodeName;
-    private String nodeContents;
-    private static Tree tree;
+    private final String nodeName;
+    private final String nodeContents;
 
+    public String getNodeName() {
+        return nodeName;
+    }
+
+    public String getNodeContents() {
+        return nodeContents;
+    }
 
     public TreeNode(String nodeName, String nodeContents)
     {
         this.nodeName = nodeName;
         this.nodeContents = nodeContents;
-        tree.getNodes().add(this);
     }
+
+    public void SearchStack(int choice, String search)
+    {
+
+    }
+
 }

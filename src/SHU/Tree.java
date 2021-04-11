@@ -1,44 +1,33 @@
 package SHU;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreePath;
-import java.awt.*;
-import java.util.Enumeration;
-import java.util.Scanner;
 import java.util.Stack;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class Tree extends JFrame {
 
     private JTree tree;
-    private String ctx;
-
-    private final Stack<TreeNode> nodes = new Stack<>();
-
-    public Stack<TreeNode> getNodes() {
-        return nodes;
-    }
-
     public JTree getTree() { return this.tree; }
 
-    DefaultMutableTreeNode temp = new DefaultMutableTreeNode();
-    int level;
+    private String ctx;
 
+    int level = -2;
     public void setLevel(int level) {
         this.level = this.level + level;
     }
 
-    public Tree() {
+    DefaultMutableTreeNode temp = new DefaultMutableTreeNode();
 
+    private Stack<TreeNode> stack = new Stack<>();
+    public Stack<TreeNode> getStack() {
+        return stack;
+    }
+
+    public Tree() {
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("JTree Parse Tree");
         this.setSize(300, 300);
-        //this.pack();
         this.setVisible(true);
 
 //        this.setLayout(new BorderLayout());
@@ -46,10 +35,6 @@ public class Tree extends JFrame {
 //        this.add(scrollPane);
 
         //TODO: FIX SCROLL PANE
-
-        level = -2;
-
-
 
         /*ImageIcon imageIcon = new ImageIcon(Tree.class.getResource("/leaf.jpg"));
         DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
@@ -61,15 +46,13 @@ public class Tree extends JFrame {
         this.ctx = ctx;
     }
 
-    public String searchTree(String nodeName)
+    public void searchTree(String nodeName, int option)
     {
-        String regex = ".*" + nodeName + ".*";
+        /*String regex = ".*" + nodeName + ".*";
         Pattern pattern = Pattern.compile(regex);;
-        Matcher matcher = pattern.matcher(ctx);
+        Matcher matcher = pattern.matcher(ctx);*/
 
-        System.out.println("STACK:\n" + nodes);
-
-        int count = 0;
+        /*int count = 0;
         System.out.println("CTX:\n" + ctx + "\nSEARCHING FOR:\n" + nodeName);
         while(matcher.find()) {
             count++;
@@ -78,20 +61,42 @@ public class Tree extends JFrame {
         if (matcher.find())
             return nodeName;
         else
-            return null;
+            return null;*/
 
+        String[] nodes = new String[stack.size()];
 
-        //TODO: regex works for some
+        switch (option)
+        {
+            case 1:
+                for (int i = 0; i < stack.size(); i++)
+                {
+                    nodes[i] = stack.get(i).getNodeName();
+                }
+                break;
+            case 2:
+                for (int i = 0; i < stack.size(); i++)
+                {
+                    nodes[i] = stack.get(i).getNodeContents();
+                }
+                break;
+            case 3:
+                break;
+        }
+        System.out.println("Stack size: " + stack.size());
 
-        //STACK:
-        //[
-        // Program, programyanan:, output("anything mate",yanan), endprogram, procyananinput(yanan)endproc, program header, program, yanan, :,
-        // block, output("anything mate",yanan), output, output, (, "anything mate", ,, yanan, ), program ends, endprogram, proc defun, proc, yanan, input(yanan),
-        // endproc, block, input(yanan), Input, input, (, yanan, )
-        // ]
-        //CTX:
-        //programyanan:output("anything mate",yanan)endprogramprocyananinput(yanan)endproc
+        for (int i = 0; i < stack.size(); i++)
+        {
+            if (nodeName.equals(nodes[i]))
+            {
+                System.out.println(nodeName + " found! at index " + i);
+            }
+            else
+                System.out.println(nodeName + " does not = " + stack.get(i).getNodeName());
+        }
 
+        //TODO: CARRY ON SEARCH. NODE SEARCH KINDA WORKS, TEST FOR NODE CONTENTS
+
+        //PAST SEARCH BLOCK
         /*DefaultMutableTreeNode node = null;
         Enumeration e = GetRootNode().breadthFirstEnumeration();
 
@@ -99,12 +104,8 @@ public class Tree extends JFrame {
             node = (DefaultMutableTreeNode) e.nextElement();
             if (nodeName.equals(node.toString())) {
                 return node.toString() + " found at depth " + node.getLevel() + " at index " + node.getSiblingCount();
-
-
-              //TODO: MAKE SEARCH RESULTS BETTER
             }
         }*/
-
     }
 
     //TRYING TO HIGHLIGHT SEARCHED NODE
@@ -121,18 +122,24 @@ public class Tree extends JFrame {
         }
     });*/
 
-    public void NewNode(String name) {
+    public void NewNode(TreeNode node) {
         temp = GetRootNode();
+        stack.add(node);
         //System.out.println("\nNode: " + name + "\nTemp: " + temp + "\nTemp.getDepth(): " + temp.getDepth() + "\nLevel: " + level );
         try{
             for (int i = 0; i < level; i++)
                 temp = (DefaultMutableTreeNode) temp.getLastChild();
             for (int i = 0; i > level; i--)
                 temp = (DefaultMutableTreeNode) temp.getParent();
-            temp.add(new DefaultMutableTreeNode(name));
+            temp.add(new DefaultMutableTreeNode(node.getNodeName()));
+
+            temp = (DefaultMutableTreeNode) temp.getLastChild();
+            temp.add(new DefaultMutableTreeNode(node.getNodeContents()));
+            temp = (DefaultMutableTreeNode) temp.getParent();
+
         }
         catch (Exception e) {
-            System.err.println("WORKING ON NODE " + name + ". TEMP IS " + temp + ". NODE NOT ADDED TO TREE");
+            System.err.println("WORKING ON NODE " + node.getNodeName() + ". TEMP IS " + temp + ". NODE NOT ADDED TO TREE");
             if (temp != null)
                 System.err.println(e);
         }
@@ -143,18 +150,17 @@ public class Tree extends JFrame {
         return (DefaultMutableTreeNode) tree.getModel().getRoot();
     }
 
-    public void CreateTree(String name, String contents)
+    public void CreateTree(TreeNode node)
     {
-        tree = new JTree(new DefaultMutableTreeNode(name));
+        tree = new JTree(new DefaultMutableTreeNode(node.getNodeName()));
         add(tree);
-        nodes.push(new TreeNode(name, contents));
+        stack.add(node);
     }
+
+}
 
 // TREE
 // STACK (TREENODE(NAME, CONTENTS))
-
-
-
 
 //program{                    open, temp stays
 //    program head{}          closed, temp stays
@@ -168,5 +174,3 @@ public class Tree extends JFrame {
 //        }
 //    }
 // }
-
-}
