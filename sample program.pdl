@@ -1,0 +1,17 @@
+program yanan:
+    output ("anything mate", yanan)
+endprogram
+proc yanan
+    input (yanan)
+endproc
+
+program yanan:
+
+endprogram
+proc yanan
+    input (yanan)
+endproc
+
+? 0, or 1.
+* 0 or more.
++ 1 or more.
