@@ -39,7 +39,7 @@ public class Worker extends pdlBaseListener{
 
     @Override public void enterProgram(pdlParser.ProgramContext ctx) {
         System.out.println("Enter program");
-        tree.CreateTree("Program");
+        tree.CreateTree("Program", ctx.getText());
         printNodeContents(ctx);
         tree.getCtx(ctx.getText());
 

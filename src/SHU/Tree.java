@@ -17,6 +17,11 @@ public class Tree extends JFrame {
     private JTree tree;
     private String ctx;
 
+    private final Stack<TreeNode> nodes = new Stack<>();
+
+    public Stack<TreeNode> getNodes() {
+        return nodes;
+    }
 
     public JTree getTree() { return this.tree; }
 
@@ -125,7 +130,6 @@ public class Tree extends JFrame {
             for (int i = 0; i > level; i--)
                 temp = (DefaultMutableTreeNode) temp.getParent();
             temp.add(new DefaultMutableTreeNode(name));
-            nodes.push(name);
         }
         catch (Exception e) {
             System.err.println("WORKING ON NODE " + name + ". TEMP IS " + temp + ". NODE NOT ADDED TO TREE");
@@ -139,15 +143,15 @@ public class Tree extends JFrame {
         return (DefaultMutableTreeNode) tree.getModel().getRoot();
     }
 
-    public void CreateTree(String name)
+    public void CreateTree(String name, String contents)
     {
         tree = new JTree(new DefaultMutableTreeNode(name));
         add(tree);
-        nodes.push(name);
-
+        nodes.push(new TreeNode(name, contents));
     }
 
-
+// TREE
+// STACK (TREENODE(NAME, CONTENTS))
 
 
 
