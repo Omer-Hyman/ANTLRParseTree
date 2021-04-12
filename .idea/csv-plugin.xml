@@ -45,6 +45,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\src\SHU\tryingGUI.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\src\parseTree\pdlParser.java">
+          <value>
+            <Attribute>
+              <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

@@ -20,9 +20,5 @@ public class TreeNode {
         this.nodeContents = nodeContents;
     }
 
-    public void SearchStack(int choice, String search)
-    {
-
-    }
 
 }

@@ -4,6 +4,7 @@ import parseTree.*;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
+import java.util.Scanner;
 
 public class Worker extends pdlBaseListener{
 
@@ -36,7 +37,7 @@ public class Worker extends pdlBaseListener{
     }
 
     @Override public void enterProgram(pdlParser.ProgramContext ctx) {
-        System.out.println("Enter program");
+        System.out.println("Enter program " + ctx.getChildCount());
         tree.getCtx(ctx.getText());
         tree.CreateTree(new TreeNode("program", ctx.getText()));
     }
@@ -46,10 +47,15 @@ public class Worker extends pdlBaseListener{
         for (int i = 0; i < tree.getTree().getRowCount(); i++) {
             tree.getTree().expandRow(i);
         }
+        System.out.println("input root node for subtree");
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine();
+        tree.SubTree(userInput);
     }
 
     @Override public void enterProgramHeader(pdlParser.ProgramHeaderContext ctx) {
-        System.out.println("Enter program header");
+        System.out.println("Enter program header " + ctx.getChildCount());
+
         TreeNode node = new TreeNode("program header", ctx.getText());
         tree.NewNode(node);
     }
@@ -59,7 +65,7 @@ public class Worker extends pdlBaseListener{
     }
 
     @Override public void enterBlock(pdlParser.BlockContext ctx) {
-        System.out.println("Enter block");
+        System.out.println("Enter block " + ctx.getChildCount());
         TreeNode node = new TreeNode("block", ctx.getText());
         tree.NewNode(node);
     }
@@ -69,7 +75,7 @@ public class Worker extends pdlBaseListener{
     }
 
     @Override public void enterOutputStatement(pdlParser.OutputStatementContext ctx) {
-        System.out.println("Enter output statement");
+        System.out.println("Enter output statement " + ctx.getChildCount());
         TreeNode node = new TreeNode("output", ctx.getText());
         tree.NewNode(node);
     }
