@@ -18,6 +18,7 @@ public class Main {
         String inputFile = "sample program.pdl";
         InputStream inputStream = System.in;
         Worker worker = new Worker();
+        Scanner scanner;
 
         if (inputFile != null)
         {
@@ -38,6 +39,31 @@ public class Main {
         {
             System.out.println("Usage: java pdl.pdl <source>");
         }
+
+
+
+        String input;
+
+        do {
+            System.out.println("Would you like to view the stack? Answer Y/N.");
+            scanner = new Scanner(System.in);
+            input = scanner.next();
+            if (input.matches("n|N"))
+                break;
+            worker.node.DisplayStack();
+        }while(input.matches("y|Y"));
+
+        do {
+            System.out.println("Would you like to build a new subtree? Answer Y/N.");
+            scanner = new Scanner(System.in);
+            input = scanner.next();
+            if (input.matches("n|N"))
+                break;
+            System.out.println("input root node for subtree");
+            input = scanner.nextLine();
+            worker.tree.SubTree(input);
+        }while(input.matches("y|Y"));
+
 
         String userInput = "y";
 
@@ -67,25 +93,3 @@ public class Main {
     }
 
 }
-
-//VISITOR
-       /* try{
-            System.out.println("Enter your greeting");
-            input = new ANTLRInputStream(System.in);
-
-            omerLanguageLexer lexer = new omerLanguageLexer(input);
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
-            omerLanguageParser parser = new omerLanguageParser(tokens);
-            ParseTree tree = parser.variable();
-
-            //System.out.println(tree.toStringTree(parser));
-
-            Worker worker = new Worker();
-            Integer result = worker.visit(tree);
-            //System.out.println("The result was " + result);
-
-
-        }catch (IOException e)
-        {
-            e.printStackTrace();
-        }*/
