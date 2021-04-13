@@ -15,7 +15,7 @@ public class Tree extends JFrame {
     private JTree tree;
     public DefaultMutableTreeNode GetRootNode()
     {
-        return (DefaultMutableTreeNode) tree.getModel().getRoot();
+        return (DefaultMutableTreeNode) this.tree.getModel().getRoot();
     }
 
     private JScrollPane sPane = new JScrollPane(tree,
@@ -24,14 +24,13 @@ public class Tree extends JFrame {
     private String ctx;
     int level = -2;
 
-    TreeNode node = new TreeNode(null, null);
+    TreeNode node = new TreeNode();
 
     public JTree getTree() { return this.tree; }
 
     public void setLevel(int level) {
         this.level = this.level + level;
     }
-
 
     public Tree() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

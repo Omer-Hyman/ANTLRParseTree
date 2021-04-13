@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Worker extends pdlBaseListener{
 
-    Tree tree = new Tree();
+    static Tree tree = new Tree();
     static TreeNode node = new TreeNode();
 
     /*
@@ -51,10 +51,10 @@ public class Worker extends pdlBaseListener{
             tree.getTree().expandRow(i);
         }
         node.DisplayStack();
-        for (int i = 0; i < node.getStack().size(); i++)
+        /*for (int i = 0; i < node.getStack().size(); i++)
         {
             tree.NewNode(node.getStack().get(i));
-        }
+        }*/
 
     }
 
