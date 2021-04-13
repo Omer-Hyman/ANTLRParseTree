@@ -67,7 +67,7 @@ public class Main {
 
         String userInput = "y";
 
-        /*do {
+        do {
             System.out.println("Would you like to search the tree? Answer Y/N.");
             Scanner scanner = new Scanner(System.in);
             userInput = scanner.next();
@@ -88,7 +88,7 @@ public class Main {
                 case "n" -> System.out.println("OK, I won't search the tree!");
                 default -> System.out.println("Tree not searched");
             }
-        }while(userInput.equals("y"));*/
+        }while(userInput.equals("y"));
 
     }
 
