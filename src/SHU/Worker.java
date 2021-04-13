@@ -8,21 +8,9 @@ import java.util.Scanner;
 
 public class Worker extends pdlBaseListener{
 
-    static Tree tree = new Tree();
-
-    /*
-    public void printNodeContents(ParserRuleContext ctx){
-        tree.setLevel(1);
-        for (int i = 0; i < ctx.getChildCount();i++)
-        {
-//            tree.NewNode(ctx.getChild(i).getText());
-        }
-        tree.setLevel(-1);
-
-    }*/
+    Tree tree = new Tree();
 
     public void FindNode(String name, int option) {
-
         tree.searchTree(name, option);
     }
 
@@ -54,13 +42,11 @@ public class Worker extends pdlBaseListener{
         {
             tree.NewNode(node.getStack().get(i));
         }*/
-
     }
 
     @Override public void enterProgramHeader(pdlParser.ProgramHeaderContext ctx) {
         System.out.println("Enter program header " + ctx.getChildCount());
-        TreeNode node = new TreeNode("program header", ctx.getText());
-        tree.NewNode(node);
+        tree.NewNode(new TreeNode("program header", ctx.getText()));
     }
 
     @Override public void exitProgramHeader(pdlParser.ProgramHeaderContext ctx) {
@@ -79,8 +65,7 @@ public class Worker extends pdlBaseListener{
 
     @Override public void enterOutputStatement(pdlParser.OutputStatementContext ctx) {
         System.out.println("Enter output statement " + ctx.getChildCount());
-        TreeNode node = new TreeNode("output", ctx.getText());
-        tree.NewNode(node);
+        tree.NewNode(new TreeNode("output", ctx.getText()));
     }
 
     @Override public void exitOutputStatement(pdlParser.OutputStatementContext ctx) {
@@ -89,8 +74,7 @@ public class Worker extends pdlBaseListener{
 
     @Override public void enterGlobals(pdlParser.GlobalsContext ctx) {
         System.out.println("Enter globals");
-        TreeNode node = new TreeNode("globals", ctx.getText());
-        tree.NewNode(node);
+        tree.NewNode(new TreeNode("globals", ctx.getText()));
     }
 
     @Override public void exitGlobals(pdlParser.GlobalsContext ctx) {
@@ -99,8 +83,7 @@ public class Worker extends pdlBaseListener{
 
     @Override public void enterProgramEnds(pdlParser.ProgramEndsContext ctx) {
         System.out.println("Enter program ends");
-        TreeNode node = new TreeNode("program ends", ctx.getText());
-        tree.NewNode(node);
+        tree.NewNode(new TreeNode("program ends", ctx.getText()));
     }
 
     @Override public void exitProgramEnds(pdlParser.ProgramEndsContext ctx) {
@@ -109,8 +92,7 @@ public class Worker extends pdlBaseListener{
 
     @Override public void enterProcDefun(pdlParser.ProcDefunContext ctx) {
         System.out.println("Enter proc defun");
-        TreeNode node = new TreeNode("proc defun", ctx.getText());
-        tree.NewNode(node);
+        tree.NewNode(new TreeNode("proc defun", ctx.getText()));
     }
 
     @Override public void exitProcDefun(pdlParser.ProcDefunContext ctx) {
@@ -119,8 +101,7 @@ public class Worker extends pdlBaseListener{
 
     @Override public void enterComparator(pdlParser.ComparatorContext ctx) {
         System.out.println("Enter comparator");
-        TreeNode node = new TreeNode("comparator", ctx.getText());
-        tree.NewNode(node);
+        tree.NewNode(new TreeNode("comparator", ctx.getText()));
     }
 
     @Override public void exitComparator(pdlParser.ComparatorContext ctx) {
@@ -201,15 +182,10 @@ public class Worker extends pdlBaseListener{
         System.out.println("Enter value: " + ctx.getText());
         TreeNode node = new TreeNode("value", ctx.getText());
         tree.NewNode(node);
-
     }
 
     @Override public void exitValue(pdlParser.ValueContext ctx) {
         System.out.println("Exit value: " + ctx.getText());
     }
-
-
-
-
 
 }

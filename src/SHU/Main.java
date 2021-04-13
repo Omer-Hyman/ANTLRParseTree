@@ -40,9 +40,8 @@ public class Main {
             System.out.println("Usage: java pdl.pdl <source>");
         }
 
-
-
-        String input;
+        String input, input2;
+        int userInput;
 
         do {
             System.out.println("Would you like to view the stack? Answer Y/N.");
@@ -64,31 +63,23 @@ public class Main {
             worker.tree.SubTree(input);
         }while(input.matches("y|Y"));
 
-
-        String userInput = "y";
-
         do {
             System.out.println("Would you like to search the tree? Answer Y/N.");
-            Scanner scanner = new Scanner(System.in);
-            userInput = scanner.next();
-
-            switch (userInput) {
-                case "y" -> {
-                    System.out.println("Would you like to;\n (1)search a node\n (2)a node's contents\n (3)or both?\n ANSWER WITH 1,2 OR 3!");
-                    scanner = new Scanner(System.in);
-                    int userInput2 = scanner.nextInt();
-
-                    System.out.println("Input a node you would like to search for!");
-                    scanner = new Scanner(System.in);
-                    String userInput3 = scanner.nextLine();
-
-                    worker.FindNode(userInput3, userInput2);
-
-                }
-                case "n" -> System.out.println("OK, I won't search the tree!");
-                default -> System.out.println("Tree not searched");
+            scanner = new Scanner(System.in);
+            input = scanner.next();
+            if (input.matches("n|N")) {
+                System.out.println("OK, I won't search the tree!");
+                break;
             }
-        }while(userInput.equals("y"));
+
+            System.out.println("Would you like to;\n (1)search a node\n (2)a node's contents\n (3)or both?\n ANSWER WITH 1,2 OR 3!");
+            scanner = new Scanner(System.in);
+            userInput = scanner.nextInt();
+            System.out.println("Input a node you would like to search for!");
+            scanner = new Scanner(System.in);
+            input2 = scanner.nextLine();
+            worker.FindNode(input, userInput);
+        }while(input.matches("y|Y"));
 
     }
 

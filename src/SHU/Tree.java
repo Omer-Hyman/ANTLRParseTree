@@ -10,8 +10,8 @@ import java.util.Stack;
 
 public class Tree extends JFrame {
 
-    private JFrame frame = new JFrame();
     private JTree tree;
+
     public DefaultMutableTreeNode GetRootNode()
     {
         return (DefaultMutableTreeNode) this.tree.getModel().getRoot();
@@ -20,6 +20,7 @@ public class Tree extends JFrame {
     private JScrollPane sPane = new JScrollPane(tree,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
     private String ctx;
     int level = -2;
 
@@ -150,21 +151,4 @@ public class Tree extends JFrame {
         }
     }
 
-
 }
-
-// TREE
-// STACK (TREENODE(NAME, CONTENTS))
-
-//program{                    open, temp stays
-//    program head{}          closed, temp stays
-//    block{                  open, temp moves down a level
-//        output{}            closed, temp moves up a level
-//    }
-//    program ends{}          closed, temp stays
-//    proc defun{             open, temp moves down a level
-//        block{              open, temp moves down a level
-//            input{}
-//        }
-//    }
-// }

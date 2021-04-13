@@ -1,4 +1,19 @@
 program yanan:
+global identifier, identifier2
+call identifier(3)
+endprogram
+proc yanan
+    input (yanan)
+    if (ident < "hello") then
+        set ident to 3
+    else
+        while ( identifier2 >= 4) do
+            call identifier(3, 4)
+        endwhile
+    endif
+endproc
+
+program yanan:
     output ("anything mate", yanan)
 endprogram
 proc yanan
