@@ -50,7 +50,7 @@ public class Main {
             input = scanner.next();
             if (input.matches("n|N"))
                 break;
-            worker.node.DisplayStack();
+            worker.tree.DisplayStack();
         }while(input.matches("y|Y"));
 
         do {
