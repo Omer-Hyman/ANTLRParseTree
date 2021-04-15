@@ -44,7 +44,6 @@ public class Main {
         //TODO: The parse tree can be a (valid) subset of an entire program.
         //      BUILDS SUBTREE BUT STILL STARTING FROM PROGRAM
 
-        //TODO: Trees are displayed successfully for most valid, and parsable, programs.
         //TODO: The output may be a useful intermediate representation such as
         //  S-expressions, JSON documents, or XML structures
 

@@ -1,4 +1,6 @@
-
+program hello2:
+    output ("anything mate", yanan)
+endprogram
 proc world
     input (yanan)
 endproc

@@ -9,7 +9,6 @@ import java.util.Stack;
 
 
 public class Tree extends JFrame {
-
     private JTree tree;
     private TreeNode node = new TreeNode();
 
@@ -17,9 +16,7 @@ public class Tree extends JFrame {
     {
         return (DefaultMutableTreeNode) this.tree.getModel().getRoot();
     }
-    JScrollPane sPane = new JScrollPane(tree,
-            ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
 
     private String ctx;
     int level = -2;
@@ -37,12 +34,11 @@ public class Tree extends JFrame {
     public Tree() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("JTree Parse Tree");
-        this.setVisible(true);
         this.setSize(400,400);
+        this.setLocationRelativeTo(null);
 
 
         //TODO: CHANGE LEAF ICONS
-        //TODO: DO MORE SAMPLE PROGRAMS - done ish
         //TODO: SUBTREES
         //TODO: FIX TREE TO ONLY DISPLAY THE RIGHT CTX.GETTEXT()
         //TODO: STRING TEMPLATE - TURN INTO JS
@@ -88,8 +84,9 @@ public class Tree extends JFrame {
         tree = new JTree(new DefaultMutableTreeNode(node.getNodeName()));
         node.getStack().add(node);
 
-        add(tree);//change to add(sPane) when manage to figure it out
+        JScrollPane sPane = new JScrollPane(tree);
 
+        add(sPane);
         setVisible(true);
     }
 
