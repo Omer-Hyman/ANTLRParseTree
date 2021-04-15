@@ -11,13 +11,13 @@ import java.util.Stack;
 public class Tree extends JFrame {
 
     private JTree tree;
+    private TreeNode node = new TreeNode();
 
     public DefaultMutableTreeNode GetRootNode()
     {
         return (DefaultMutableTreeNode) this.tree.getModel().getRoot();
     }
-
-    private JScrollPane sPane = new JScrollPane(tree,
+    JScrollPane sPane = new JScrollPane(tree,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
@@ -30,12 +30,7 @@ public class Tree extends JFrame {
         this.level = this.level + level;
     }
 
-    private Stack<TreeNode> stack = new Stack<>();
-    public Stack<TreeNode> getStack() {
-        return stack;
-    }
-
-    public void getCtx(String ctx) {
+    public void setCtx(String ctx) {
         this.ctx = ctx;
     }
 
@@ -43,7 +38,8 @@ public class Tree extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("JTree Parse Tree");
         this.setVisible(true);
-        this.setSize(400, 400);
+        this.setSize(400,400);
+
 
         //TODO: CHANGE LEAF ICONS
         //TODO: DO MORE SAMPLE PROGRAMS - done ish
@@ -90,9 +86,9 @@ public class Tree extends JFrame {
     public void CreateTree(TreeNode node)
     {
         tree = new JTree(new DefaultMutableTreeNode(node.getNodeName()));
-        stack.add(node);
+        node.getStack().add(node);
 
-        add(sPane);
+        add(tree);//change to add(sPane) when manage to figure it out
 
         setVisible(true);
     }
@@ -102,22 +98,22 @@ public class Tree extends JFrame {
         switch (option)
         {
             case 1:
-                for (int i = 0; i < stack.size(); i++)
+                for (int i = 0; i < node.getStack().size(); i++)
                 {
-                    if (stack.get(i).getNodeName().equals(nodeName))
+                    if (node.getStack().get(i).getNodeName().equals(nodeName))
                     {
                         System.out.println(nodeName + " found! at index " + i);
-                        return stack.get(i);
+                        return node.getStack().get(i);
                     }
                 }
                 break;
             case 2:
-                for (int i = 0; i < stack.size(); i++)
+                for (int i = 0; i < node.getStack().size(); i++)
                 {
-                    if (stack.get(i).getNodeContents().equals(nodeName))//NOT PROPER
+                    if (node.getStack().get(i).getNodeContents().equals(nodeName))//NOT PROPER
                     {
                         System.out.println(nodeName + " found! at index " + i);
-                        return stack.get(i);
+                        return node.getStack().get(i);
                     }
                 }
                 break;
@@ -134,11 +130,11 @@ public class Tree extends JFrame {
 
     public void DisplayStack()
     {
-        for (int i = 0; i < stack.size();i++)
+        for (int i = 0; i < node.getStack().size();i++)
         {
-            System.out.println("\nNode: " + stack.get(i).getNodeName()+ "\nNode Contents: " + stack.get(i).getNodeContents());
+            System.out.println("\nNode: " + node.getStack().get(i).getNodeName()+ "\nNode Contents: " + node.getStack().get(i).getNodeContents());
         }
-        System.out.println("Stack size: " + stack.size());
+        System.out.println("Stack size: " + node.getStack().size());
     }
 
     public void SubTree(String rootNode)

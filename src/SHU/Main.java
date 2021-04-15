@@ -40,6 +40,24 @@ public class Main {
             System.out.println("Usage: java pdl.pdl <source>");
         }
 
+
+        //TODO: The parse tree can be a (valid) subset of an entire program.
+        //      BUILDS SUBTREE BUT STILL STARTING FROM PROGRAM
+
+        //TODO: Trees are displayed successfully for most valid, and parsable, programs.
+        //TODO: The output may be a useful intermediate representation such as
+        //  S-expressions, JSON documents, or XML structures
+
+        //TODO: Search criteria can be entered and chained.
+        //TODO: Most valid programs can be searched.
+        //TODO: Searches return results where those results are available.
+        //TODO: Results are presented clearly and usefully.
+        //TODO: No matching data is still treated as a valid result.
+
+        //TODO: Subtrees are found and displayed.
+        //TODO: Code for searching and displaying trees is re-used sensibly.
+
+
         String input, input2;
         int userInput;
 
