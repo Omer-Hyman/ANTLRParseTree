@@ -1,18 +1,3 @@
-program hello2:
-    output ("anything mate", yanan)
-endprogram
-proc world
-    input (yanan)
-endproc
-
-program hello:
-endprogram
-proc hello
-    input (yanan)
-endproc
-proc world
-endproc
-
 program hello:
 global identifier, identifier2
 call identifier(3)
@@ -28,6 +13,22 @@ proc hello
         endwhile
     endif
 endproc
+
+program hello2:
+    output ("anything mate", yanan)
+endprogram
+proc world
+    input (yanan)
+endproc
+
+program hello:
+endprogram
+proc hello
+    input (yanan)
+endproc
+proc world
+endproc
+
 
 
 

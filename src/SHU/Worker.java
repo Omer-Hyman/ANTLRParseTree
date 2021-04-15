@@ -5,9 +5,10 @@ import parseTree.*;
 public class Worker extends pdlBaseListener{
 
     Tree tree = new Tree();
+    TreeNode node = new TreeNode();
 
     public void FindNode(String name, int option) {
-        tree.searchTree(name, option);
+        node.searchTree(name, option);
     }
 
     @Override
@@ -31,11 +32,6 @@ public class Worker extends pdlBaseListener{
         for (int i = 0; i < tree.getTree().getRowCount(); i++) {
             tree.getTree().expandRow(i);
         }
-        tree.DisplayStack();
-        /*for (int i = 0; i < node.getStack().size(); i++)
-        {
-            tree.NewNode(node.getStack().get(i));
-        }*/
     }
 
     @Override public void enterProgramHeader(pdlParser.ProgramHeaderContext ctx) {

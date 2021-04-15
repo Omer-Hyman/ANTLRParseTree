@@ -6,6 +6,8 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Tree extends JFrame {
@@ -73,7 +75,7 @@ public class Tree extends JFrame {
 //            temp = (DefaultMutableTreeNode) temp.getParent();
         }
         catch (Exception e) {
-            System.err.println("WORKING ON NODE " + node.getNodeName() + ". TEMP IS " + temp + ". NODE NOT ADDED TO TREE");
+            System.err.println("TEMP IS " + temp + ". " + node.getNodeName() + " NOT ADDED TO TREE");
             if (temp != null)
                 System.err.println(e);
         }
@@ -82,7 +84,6 @@ public class Tree extends JFrame {
     public void CreateTree(TreeNode node)
     {
         tree = new JTree(new DefaultMutableTreeNode(node.getNodeName()));
-        node.getStack().add(node);
 
         JScrollPane sPane = new JScrollPane(tree);
 
@@ -90,54 +91,11 @@ public class Tree extends JFrame {
         setVisible(true);
     }
 
-    public TreeNode searchTree(String nodeName, int option)
-    {
-        switch (option)
-        {
-            case 1:
-                for (int i = 0; i < node.getStack().size(); i++)
-                {
-                    if (node.getStack().get(i).getNodeName().equals(nodeName))
-                    {
-                        System.out.println(nodeName + " found! at index " + i);
-                        return node.getStack().get(i);
-                    }
-                }
-                break;
-            case 2:
-                for (int i = 0; i < node.getStack().size(); i++)
-                {
-                    if (node.getStack().get(i).getNodeContents().equals(nodeName))//NOT PROPER
-                    {
-                        System.out.println(nodeName + " found! at index " + i);
-                        return node.getStack().get(i);
-                    }
-                }
-                break;
-            case 3:
-                break;
-        }
-        return null;
-        //System.out.println("Stack size: " + stack.size());
-
-        //TODO: CARRY ON SEARCH. IMPLEMENT 3RD CASE. MAYBE IMPROVE WITH REGEX.
-        //TODO: TRY TO HIGHLIGHT SEARCHED NODE
-
-    }
-
-    public void DisplayStack()
-    {
-        for (int i = 0; i < node.getStack().size();i++)
-        {
-            System.out.println("\nNode: " + node.getStack().get(i).getNodeName()+ "\nNode Contents: " + node.getStack().get(i).getNodeContents());
-        }
-        System.out.println("Stack size: " + node.getStack().size());
-    }
 
     public void SubTree(String rootNode)
     {
         try {
-            CreateTree(searchTree(rootNode, 1));
+            //CreateTree(node.searchTree(rootNode, 1));
         }catch(Exception e)
         {
             System.err.println("Node couldn't be found!");

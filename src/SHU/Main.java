@@ -41,6 +41,7 @@ public class Main {
         }
 
 
+
         //TODO: The parse tree can be a (valid) subset of an entire program.
         //      BUILDS SUBTREE BUT STILL STARTING FROM PROGRAM
 
@@ -48,7 +49,6 @@ public class Main {
         //  S-expressions, JSON documents, or XML structures
 
         //TODO: Search criteria can be entered and chained.
-        //TODO: Most valid programs can be searched.
         //TODO: Searches return results where those results are available.
         //TODO: Results are presented clearly and usefully.
         //TODO: No matching data is still treated as a valid result.
@@ -57,46 +57,51 @@ public class Main {
         //TODO: Code for searching and displaying trees is re-used sensibly.
 
 
-        String input, input2;
-        int userInput;
+        String input;
+        int userInput, userInput2;
 
+//        worker.node.DisplayStack();
         do {
-            System.out.println("Would you like to view the stack? Answer Y/N.");
-            scanner = new Scanner(System.in);
-            input = scanner.next();
-            if (input.matches("n|N"))
-                break;
-            worker.tree.DisplayStack();
-        }while(input.matches("y|Y"));
-
-        do {
-            System.out.println("Would you like to build a new subtree? Answer Y/N.");
-            scanner = new Scanner(System.in);
-            input = scanner.next();
-            if (input.matches("n|N"))
-                break;
-            System.out.println("input root node for subtree");
-            input = scanner.nextLine();
-            worker.tree.SubTree(input);
-        }while(input.matches("y|Y"));
-
-        do {
-            System.out.println("Would you like to search the tree? Answer Y/N.");
-            scanner = new Scanner(System.in);
-            input = scanner.next();
-            if (input.matches("n|N")) {
-                System.out.println("OK, I won't search the tree!");
-                break;
-            }
-
-            System.out.println("Would you like to;\n (1)search a node\n (2)a node's contents\n (3)or both?\n ANSWER WITH 1,2 OR 3!");
+            System.out.println("\nWelcome!\nWhat would you like to do?\n" +
+                                    "1) View the stack\n" +
+                                    "2) Search the parse tree\n" +
+                                    "3) Build a new subtree\n" +
+                                    "4) Nothing");
             scanner = new Scanner(System.in);
             userInput = scanner.nextInt();
-            System.out.println("Input a node you would like to search for!");
-            scanner = new Scanner(System.in);
-            input2 = scanner.nextLine();
-            worker.FindNode(input, userInput);
-        }while(input.matches("y|Y"));
+            switch (userInput)
+            {
+                case 1:
+                    System.out.println("\nVIEWING STACK...\n");
+                    worker.node.DisplayStack();
+                    break;
+                case 2:
+                    /*System.out.println("Would you like to;\n " +
+                            "(1)search a node\n " +
+                            "(2)a node's contents\n " +
+                            "(3)or both?\n " +
+                            "ANSWER WITH 1,2 OR 3!");
+                    scanner = new Scanner(System.in);
+                    userInput2 = scanner.nextInt();
+*/
+                    System.out.println("Input a node you would like to search for!");
+                    scanner = new Scanner(System.in);
+                    input = scanner.nextLine();
+
+                    System.out.println("\nSEARCHING TREE...\n");
+                    worker.FindNode(input, 1);
+                    break;
+                case 3:
+                    System.out.println("Input a root node for the subtree");
+                    input = scanner.nextLine();
+
+                    System.out.println("\nCREATING SUBTREE...\n");
+                    worker.tree.SubTree(input);
+                    break;
+                case 4:
+                    break;
+            }
+        }while(userInput != 4);
 
     }
 
