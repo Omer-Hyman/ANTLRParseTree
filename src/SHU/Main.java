@@ -52,6 +52,10 @@ public class Main {
             }*/
 
 
+            //worker = new Worker();
+            //walker.walk(worker, tree);
+            //in all cases
+
             switch (userInputInt) {
                 case 1:
                     System.out.println("\nDISPLAYING THE TREE...\n");
@@ -68,15 +72,18 @@ public class Main {
                             "(3)or both?\n " +
                             "ANSWER WITH 1,2 OR 3!");
                     scanner = new Scanner(System.in);
-                    userInput2 = scanner.nextInt();
+                    userInput2 = scanner.nextInt();*/
                     System.out.println("Input a node you would like to search for!");
                     scanner = new Scanner(System.in);
                     userInput = scanner.nextLine();
-                    ((Worker) worker).FindNode(userInput, 1);*/
+                    worker = new Worker();
+                    ((Worker) worker).SearchTree(userInput, 1);
                     break;
                 case 3:
                     System.out.println("\nPRINTING THE STACK...\n");
-                    node.DisplayStack();
+                    worker = new Worker();
+                    walker.walk(worker, tree);
+                    ((Worker) worker).DisplayStack();
                     break;
                 case 4:
                     System.out.println("\nCOMPILING...\n");
@@ -101,10 +108,12 @@ public class Main {
                     break;
             }
 
+            //TODO: RETHINK SEARCH FUNCTION, SHOULD OPTION BE A PARAMETER?
+
 
             //TODO: Search criteria can be entered and chained.
-            //TODO: Results are presented clearly and usefully.
-
+            //TODO: Results are highlighted in tree.
+            //TODO: OPEN WINDOWS EXPLORER FOR FILE SELECTION AT START
             //TODO: Subtrees are found and displayed.
             //TODO: Code for searching and displaying trees is re-used sensibly.
             // TODO: The parse tree can be a (valid) subset of an entire program.

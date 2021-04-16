@@ -2,12 +2,48 @@ package SHU;
 import org.antlr.v4.runtime.ParserRuleContext;
 import parseTree.*;
 
+import java.util.Stack;
+import java.util.regex.Pattern;
+
 public class Worker extends pdlBaseListener{
 
     int level = -2;
 
     public int getLevel() {
         return level;
+    }
+
+    private static Stack<TreeNode> stack = new Stack<>();
+
+    public Stack<TreeNode> getStack() {
+        return stack;
+    }
+
+    public void DisplayStack()
+    {
+        for (int i = 0; i < stack.size();i++)
+        {
+            System.out.println("\nNode: " + stack.get(i).getNodeName()+ "\nNode Contents: " + stack.get(i).getNodeContents());
+        }
+        System.out.println("\nStack size: " + stack.size());
+    }
+
+    public void SearchTree(String nodeName, int option)
+    {
+//        Pattern regex = Pattern.compile(nodeName, Pattern.CASE_INSENSITIVE);//search for
+//        Matcher matcher = regex.matcher(node.getStack().toString());//in this text
+//        //Pattern.matches(nodeName, node.getStack().toString());
+//
+//        boolean matchFound = matcher.find();
+
+        for (int i = 0; i < stack.size(); i++)//works for node names
+        {
+            if(Pattern.matches(nodeName, stack.get(i).getNodeName())) {
+                System.out.println("Match found at index " + i);
+            } else if(i == stack.size() - 1) {
+                System.out.println("Match not found");
+            }
+        }
     }
 
     @Override
@@ -28,7 +64,6 @@ public class Worker extends pdlBaseListener{
 
     @Override public void exitProgram(pdlParser.ProgramContext ctx) {
 //        System.out.println("Exit program");
-
     }
 
     @Override public void enterProgramHeader(pdlParser.ProgramHeaderContext ctx) {

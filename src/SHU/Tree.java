@@ -1,18 +1,11 @@
 package SHU;
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicSplitPaneUI;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.TreePath;
-import java.awt.*;
-import java.util.Stack;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class Tree extends JFrame {
     private JTree tree;
-    private TreeNode node = new TreeNode();
+    private Worker worker = new Worker();
 
     public DefaultMutableTreeNode GetRootNode()
     {
@@ -34,7 +27,7 @@ public class Tree extends JFrame {
         this.setLocationRelativeTo(null);
 
         //TODO: CHANGE LEAF ICONS
-        //TODO: FIX TREE TO ONLY DISPLAY THE RIGHT CTX.GETTEXT()
+        //TODO: FIX TREE TO DISPLAY THE RIGHT LEAF NODES
 
         //LEAF ICON SHIT
         /*ImageIcon imageIcon = new ImageIcon(Tree.class.getResource("images/leaf.png"));
@@ -74,10 +67,10 @@ public class Tree extends JFrame {
 
     public void DisplayTree()
     {
-        tree = new JTree(new DefaultMutableTreeNode(node.getStack().get(0).getNodeName()));
-        for (int i = 1; i < node.getStack().size();i++)
+        tree = new JTree(new DefaultMutableTreeNode(worker.getStack().get(0).getNodeName()));
+        for (int i = 1; i < worker.getStack().size(); i++)
         {
-            NewNode(node.getStack().get(i));
+            NewNode(worker.getStack().get(i));
         }
         JScrollPane sPane = new JScrollPane(tree);
         add(sPane);
