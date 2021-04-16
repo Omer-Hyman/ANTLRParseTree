@@ -82,6 +82,9 @@ public class Tree extends JFrame {
         JScrollPane sPane = new JScrollPane(tree);
         add(sPane);
         setVisible(true);
+        for (int i = 0; i < tree.getRowCount(); i++) {
+            tree.expandRow(i);
+        }
     }
 
     public void SubTree(String rootNode)

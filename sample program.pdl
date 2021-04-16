@@ -14,6 +14,7 @@ proc hello
     endif
 endproc
 
+
 proc calculateProduct
     set product to 0
     set time to 1

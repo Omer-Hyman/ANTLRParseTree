@@ -57,7 +57,8 @@ public class Main {
                     System.out.println("\nDISPLAYING THE TREE...\n");
                     worker = new Worker();
                     walker.walk(worker, tree);
-                    ((Worker) worker).tree.DisplayTree();
+                    Tree trees = new Tree();
+                    trees.DisplayTree();
                     break;
                 case 2:
                     System.out.println("\nSEARCHING THE TREE...\n");
