@@ -16,18 +16,12 @@ public class Tree extends JFrame {
 
     public DefaultMutableTreeNode GetRootNode()
     {
-        return (DefaultMutableTreeNode) this.tree.getModel().getRoot();
+        return (DefaultMutableTreeNode) tree.getModel().getRoot();
     }
-
 
     private String ctx;
-    int level = -2;
 
     public JTree getTree() { return this.tree; }
-
-    public void setLevel(int level) {
-        this.level = this.level + level;
-    }
 
     public void setCtx(String ctx) {
         this.ctx = ctx;
@@ -62,9 +56,9 @@ public class Tree extends JFrame {
     public void NewNode(TreeNode node) {
         DefaultMutableTreeNode temp = GetRootNode();
         try{
-            for (int i = 0; i < level; i++)
+            for (int i = 0; i < node.getLevel(); i++)
                 temp = (DefaultMutableTreeNode) temp.getLastChild();
-            for (int i = 0; i > level; i--)
+            for (int i = 0; i > node.getLevel(); i--)
                 temp = (DefaultMutableTreeNode) temp.getParent();
             temp.add(new DefaultMutableTreeNode(node.getNodeName()));
 
@@ -79,16 +73,17 @@ public class Tree extends JFrame {
         }
     }
 
-    public void CreateTree(TreeNode node)
+    public void DisplayTree()
     {
-        tree = new JTree(new DefaultMutableTreeNode(node.getNodeName()));
-
+        tree = new JTree(new DefaultMutableTreeNode(node.getStack().get(0).getNodeName()));
+        for (int i = 1; i < node.getStack().size();i++)
+        {
+            NewNode(node.getStack().get(i));
+        }
         JScrollPane sPane = new JScrollPane(tree);
-
         add(sPane);
         setVisible(true);
     }
-
 
     public void SubTree(String rootNode)
     {

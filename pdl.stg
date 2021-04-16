@@ -1,0 +1,31 @@
+enterProgram(v) ::= <<let <v> = function <v>() {
+>>
+
+exitProgram(v) ::= <<
+}
+<v>();>>
+
+globals(values) ::= <<var <values; separator=", ">;>>
+
+output(v) ::= <<console.WriteLine(<v; separator="+">);>>
+input (v) ::= <<<v> = readline();>>
+
+procCall(v, values) ::= <<<v>(<values; separator=", ">);>>
+
+expr(v, i, m) ::=  <<
+                    <if (m) >
+                    (<i> <m> <v>)
+                    <else>
+                    <v>
+                    <endif>
+                    >>
+
+assignment(ident, value) ::= <<<ident> = <value> >>
+
+ifClause(operand1, comparator, operand2) ::= <<if( <operand1> <comparator> <operand2> ) { >>
+
+elseClause() ::= " } else { "
+
+enterProcedure(v) ::= "function <v>() {"
+
+whileLoop(operand1, comparator, operand2) ::= <<while (<operand1> <comparator> <operand2>) {>>

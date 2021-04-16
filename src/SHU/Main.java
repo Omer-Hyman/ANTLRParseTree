@@ -1,6 +1,7 @@
 package SHU;
 
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -22,6 +23,16 @@ public class Main {
 
         String userInput;
         int userInputInt, userInput2Int;
+        TreeNode node = new TreeNode();
+
+        ANTLRInputStream input = new ANTLRInputStream(inputStream);
+        pdlLexer lexer = new pdlLexer(input);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        pdlParser parser = new pdlParser(tokens);
+        pdlBaseListener worker;
+        ParseTreeWalker walker = new ParseTreeWalker();
+        ParseTree tree = parser.program();
+
 
         do {
             System.out.println("\nWelcome!\nWhat would you like to do?\n" +
@@ -33,26 +44,20 @@ public class Main {
                     "6) Nothing");
             scanner = new Scanner(System.in);
             userInputInt = scanner.nextInt();
+        /*    if (inputFile != null) {
 
-            ANTLRInputStream input = new ANTLRInputStream(inputStream);
+            }
+            else {
+                System.err.println("input file path was incorrect");
+            }*/
 
-            pdlLexer lexer = new pdlLexer(input);
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
-            pdlParser parser = new pdlParser(tokens);
-
-            pdlBaseListener worker;
-            ParseTreeWalker walker = new ParseTreeWalker();
-            ParseTree tree = parser.program();
 
             switch (userInputInt) {
                 case 1:
                     System.out.println("\nDISPLAYING THE TREE...\n");
-                    if (inputFile != null) {
-                        worker = new Worker();
-                        walker.walk(worker, tree);
-                    } else {
-                        System.err.println("input file path was incorrect");
-                    }
+                    worker = new Worker();
+                    walker.walk(worker, tree);
+                    ((Worker) worker).tree.DisplayTree();
                     break;
                 case 2:
                     System.out.println("\nSEARCHING THE TREE...\n");
@@ -62,32 +67,33 @@ public class Main {
                             "(3)or both?\n " +
                             "ANSWER WITH 1,2 OR 3!");
                     scanner = new Scanner(System.in);
-                    userInput2 = scanner.nextInt();*/
+                    userInput2 = scanner.nextInt();
                     System.out.println("Input a node you would like to search for!");
                     scanner = new Scanner(System.in);
                     userInput = scanner.nextLine();
-                    worker = new Worker();
-
-                    ((Worker) worker).FindNode(userInput, 1);
+                    ((Worker) worker).FindNode(userInput, 1);*/
                     break;
                 case 3:
                     System.out.println("\nPRINTING THE STACK...\n");
-                    worker = new Worker();
-                    ((Worker) worker).node.DisplayStack();
+                    node.DisplayStack();
                     break;
                 case 4:
                     System.out.println("\nCOMPILING...\n");
                     worker = new Compiler();
                     walker.walk(worker, tree);
+                    FileWriter writer = new FileWriter("output.js");
+                    writer.write("");
+                    writer.write(worker.toString());
+                    writer.close();
                     break;
                 case 5:
                     System.out.println("\nBUILDING SUBTREE...\n");
                     System.out.println("Input a root node for the subtree");
                     userInput = scanner.nextLine();
-                    worker = new Worker();
+                    /*worker = new Worker();
 
                     System.out.println("\nCREATING SUBTREE...\n");
-                    ((Worker) worker).tree.SubTree(userInput);
+                    ((Worker) worker).tree.SubTree(userInput);*/
                     break;
                 case 6:
                     System.out.println("\nNOTHING...\n");

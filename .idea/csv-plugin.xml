@@ -45,6 +45,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\src\SHU\TreeNode.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\src\SHU\Worker.java">
           <value>
             <Attribute>

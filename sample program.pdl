@@ -1,12 +1,4 @@
 program hello:
-endprogram
-proc hello
-    input (yanan)
-endproc
-proc world
-endproc
-
-program hello:
 global identifier, identifier2
 call identifier(3)
 endprogram
@@ -29,6 +21,13 @@ proc world
     input (yanan)
 endproc
 
+program hello:
+endprogram
+proc world
+    input (yanan)
+endproc
+proc earth
+endproc
 
 program multiplyTwoNumbers:
 

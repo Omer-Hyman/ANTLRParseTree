@@ -13,10 +13,11 @@ import java.util.Stack;
 
 public class Compiler extends pdlBaseListener {
     private StringBuilder sb = new StringBuilder();
-    String program;
-    public String getProgram() {return program.toString();}
+    String programName;
+    public String getProgram() {return programName.toString();}
 
     STGroup stg = new STGroupFile("./pdl.stg");
+    public String toString() { return sb.toString(); }
 
     ArrayList<String> converted = new ArrayList<>();
     TreeNode node = new TreeNode();
@@ -25,50 +26,79 @@ public class Compiler extends pdlBaseListener {
         System.out.println("SUCCESS! NOW COMPILING!");
     }
 
+    @Override public void exitProgram(pdlParser.ProgramContext ctx){
+//        System.out.println("Printing program children\n");
+//        for (int i = 0; i < ctx.getChildCount(); i++)
+//            System.out.println(i + ": " + ctx.getChild(i).getText());
+
+        ST st = stg.getInstanceOf("exitProgram");
+        st.add("v", programName);
+        sb.append(st.render());
+    }
+
+    @Override
+    public void enterProgramHeader(pdlParser.ProgramHeaderContext ctx) {
+        programName= ctx.getChild(1).getText();
+        ST st = stg.getInstanceOf("enterProgram");
+        st.add("v", programName);
+        sb.append(st.render());
+    }
+
+    @Override
+    public void exitProgramHeader(pdlParser.ProgramHeaderContext ctx) {
+//        System.out.println("\nPrinting program header children");
+//        for (int i = 0; i < ctx.getChildCount(); i++)
+//            System.out.println(i + ": " + ctx.getChild(i).getText());
+    }
+
     @Override public void exitProgramEnds(pdlParser.ProgramEndsContext ctx) {
         //turn into string
         //converted.add(string);
+//        System.out.println("\nPrinting program ends children");
+//        for (int i = 0; i < ctx.getChildCount(); i++)
+//            System.out.println(i + ": " + ctx.getChild(i).getText());
     }
 
-    @Override public void exitInputStatement(pdlParser.InputStatementContext ctx) {
+    @Override public void enterProcDefun(pdlParser.ProcDefunContext ctx) {
+        ST st = stg.getInstanceOf("enterProcedure");
+        st.add("v", ctx.getChild(1));
+        sb.append(st.render());
+    }
 
+    @Override public void exitBlock(pdlParser.BlockContext ctx) {
+//        System.out.println("\nPrinting block children");
+//        for (int i = 0; i < ctx.getChildCount(); i++)
+//            System.out.println(i + ": " + ctx.getChild(i).getText());
+    }
+
+
+    @Override public void exitInputStatement(pdlParser.InputStatementContext ctx) {
+//        System.out.println("\nPrinting input children");
+//        for (int i = 0; i < ctx.getChildCount(); i++)
+//            System.out.println(i + ": " + ctx.getChild(i).getText());
+
+        ST st = stg.getInstanceOf("input");
+        st.add("v", ctx.getChild(2));
+        sb.append(st.render());
+    }
+
+    @Override
+    public void exitOutputStatement(pdlParser.OutputStatementContext ctx) {
+        ArrayList<String> valueNames = new ArrayList<String>();
+        for(int i=2; i<ctx.getChildCount(); i+=2)
+            valueNames.add(ctx.getChild(i).getText());
+
+        ST st = stg.getInstanceOf("output");
+        st.add("v", valueNames);
+        sb.append(st.render());
     }
 
     @Override public void exitAssignment(pdlParser.AssignmentContext ctx) {
-        String program = "let  = ";
-        List<ParseTree> nodes = ctx.children;
-        ArrayList<String> built = new ArrayList<String>();
-        built.add("let");
-        System.out.println("Printing assignment children\n\n");
-        for (int i = 0; i < node.getStack().size(); i++)
-        {
-            System.out.println(node.getStack().get(i).getNodeName());
-        }
-        node.DisplayStack();
-
-    }
-
-    @Override public void exitBlock(pdlParser.BlockContext ctx) { }
-
-
-
-
-    @Override public void exitProgramHeader(pdlParser.ProgramHeaderContext ctx) {
-        List<ParseTree> nodes = ctx.children;
-        ArrayList<String> built = new ArrayList<String>();
-        if (ctx.getChildCount() <= 3) {
-            for (int i = 0; i < ctx.getChildCount();i++)
-                built.add(nodes.get(i).getText());
-        }
-
-        ST st = stg.getInstanceOf("programHeader");
-        //st.add(built, );
-        //sb.append(st.render());
-        /*System.out.println("Printing program header children\n\n");
-        for (int i = 0; i < ctx.getChildCount(); i++)
-        {
-            System.out.println(i + ": " + ctx.getChild(i).getText());
-        }*/
+//        System.out.println("\nPrinting assignment children");
+//        for (int i = 0; i < node.getStack().size(); i++)
+//        {
+//            System.out.println(node.getStack().get(i).getNodeName());
+//        }
     }
 
     @Override public void exitGlobals(pdlParser.GlobalsContext ctx) {
@@ -85,5 +115,10 @@ public class Compiler extends pdlBaseListener {
     }
 
 
-
+    @Override public void exitProcDefun(pdlParser.ProcDefunContext ctx) {
+//        System.out.println("\nPrinting proc defun children");
+//        for (int i = 0; i < ctx.getChildCount(); i++)
+//            System.out.println(i + ": " + ctx.getChild(i).getText());
+        sb.append("}");
+    }
 }
