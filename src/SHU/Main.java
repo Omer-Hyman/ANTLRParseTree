@@ -16,93 +16,105 @@ public class Main {
         //LISTENER
 
         String inputFile = "sample program.pdl";
-        InputStream inputStream = System.in;
-        Worker worker = new Worker();
+        InputStream inputStream = new FileInputStream(inputFile);
+
         Scanner scanner;
 
-        if (inputFile != null)
-        {
-            System.out.println("// source file is "+ inputFile);
-            inputStream = new FileInputStream(inputFile);
+        String userInput;
+        int userInputInt, userInput2Int;
+
+        do {
+            System.out.println("\nWelcome!\nWhat would you like to do?\n" +
+                    "1) Display the tree\n" +
+                    "2) Search the tree\n" +
+                    "3) Print the stack\n" +
+                    "4) Compile the tree\n" +
+                    "5) Build a new subtree\n" +
+                    "6) Nothing");
+            scanner = new Scanner(System.in);
+            userInputInt = scanner.nextInt();
 
             ANTLRInputStream input = new ANTLRInputStream(inputStream);
+
             pdlLexer lexer = new pdlLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             pdlParser parser = new pdlParser(tokens);
 
-            ParseTree tree = parser.program();
+            pdlBaseListener worker;
             ParseTreeWalker walker = new ParseTreeWalker();
-            walker.walk(worker, tree);
+            ParseTree tree = parser.program();
 
-            System.out.println();
-        }else
-        {
-            System.out.println("Usage: java pdl.pdl <source>");
-        }
-
-
-
-        //TODO: The parse tree can be a (valid) subset of an entire program.
-        //      BUILDS SUBTREE BUT STILL STARTING FROM PROGRAM
-
-        //TODO: The output may be a useful intermediate representation such as
-        //  S-expressions, JSON documents, or XML structures
-
-        //TODO: Search criteria can be entered and chained.
-        //TODO: Searches return results where those results are available.
-        //TODO: Results are presented clearly and usefully.
-        //TODO: No matching data is still treated as a valid result.
-
-        //TODO: Subtrees are found and displayed.
-        //TODO: Code for searching and displaying trees is re-used sensibly.
-
-
-        String input;
-        int userInput, userInput2;
-
-//        worker.node.DisplayStack();
-        do {
-            System.out.println("\nWelcome!\nWhat would you like to do?\n" +
-                                    "1) View the stack\n" +
-                                    "2) Search the parse tree\n" +
-                                    "3) Build a new subtree\n" +
-                                    "4) Nothing");
-            scanner = new Scanner(System.in);
-            userInput = scanner.nextInt();
-            switch (userInput)
-            {
+            switch (userInputInt) {
                 case 1:
-                    System.out.println("\nVIEWING STACK...\n");
-                    worker.node.DisplayStack();
+                    System.out.println("\nDISPLAYING THE TREE...\n");
+                    if (inputFile != null) {
+                        worker = new Worker();
+                        walker.walk(worker, tree);
+                    } else {
+                        System.err.println("input file path was incorrect");
+                    }
                     break;
                 case 2:
+                    System.out.println("\nSEARCHING THE TREE...\n");
                     /*System.out.println("Would you like to;\n " +
                             "(1)search a node\n " +
                             "(2)a node's contents\n " +
                             "(3)or both?\n " +
                             "ANSWER WITH 1,2 OR 3!");
                     scanner = new Scanner(System.in);
-                    userInput2 = scanner.nextInt();
-*/
+                    userInput2 = scanner.nextInt();*/
                     System.out.println("Input a node you would like to search for!");
                     scanner = new Scanner(System.in);
-                    input = scanner.nextLine();
+                    userInput = scanner.nextLine();
+                    worker = new Worker();
 
-                    System.out.println("\nSEARCHING TREE...\n");
-                    worker.FindNode(input, 1);
+                    ((Worker) worker).FindNode(userInput, 1);
                     break;
                 case 3:
-                    System.out.println("Input a root node for the subtree");
-                    input = scanner.nextLine();
-
-                    System.out.println("\nCREATING SUBTREE...\n");
-                    worker.tree.SubTree(input);
+                    System.out.println("\nPRINTING THE STACK...\n");
+                    worker = new Worker();
+                    ((Worker) worker).node.DisplayStack();
                     break;
                 case 4:
+                    System.out.println("\nCOMPILING...\n");
+                    worker = new Compiler();
+                    walker.walk(worker, tree);
+                    break;
+                case 5:
+                    System.out.println("\nBUILDING SUBTREE...\n");
+                    System.out.println("Input a root node for the subtree");
+                    userInput = scanner.nextLine();
+                    worker = new Worker();
+
+                    System.out.println("\nCREATING SUBTREE...\n");
+                    ((Worker) worker).tree.SubTree(userInput);
+                    break;
+                case 6:
+                    System.out.println("\nNOTHING...\n");
                     break;
             }
-        }while(userInput != 4);
+
+
+            //TODO: Search criteria can be entered and chained.
+            //TODO: Results are presented clearly and usefully.
+
+            //TODO: Subtrees are found and displayed.
+            //TODO: Code for searching and displaying trees is re-used sensibly.
+            // TODO: The parse tree can be a (valid) subset of an entire program.
+            //      BUILDS SUBTREE BUT STILL STARTING FROM PROGRAM
+
+            //TODO: A range of valid programs can be transformed into valid outputs that can be executed.
+            //TODO: Code is clear and appropriate
+            //TODO: Correct structures are used
+            //TODO: Errors or edge-conditions are handled gracefully
+
+            //=== is value and type in JS
+
+            //search, display, compile
+
+        }while (userInputInt != 6);
 
     }
+
 
 }

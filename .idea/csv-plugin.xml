@@ -24,6 +24,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\sample program.pdl">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\src\SHU\Main.java">
           <value>
             <Attribute>

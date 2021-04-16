@@ -41,9 +41,7 @@ public class Tree extends JFrame {
 
 
         //TODO: CHANGE LEAF ICONS
-        //TODO: SUBTREES
         //TODO: FIX TREE TO ONLY DISPLAY THE RIGHT CTX.GETTEXT()
-        //TODO: STRING TEMPLATE - TURN INTO JS
 
         //LEAF ICON SHIT
         /*ImageIcon imageIcon = new ImageIcon(Tree.class.getResource("images/leaf.png"));
