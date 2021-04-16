@@ -1,4 +1,4 @@
-// Generated from C:/Users/omerh/OneDrive - Sheffield Hallam University/FOPL/omerLanguage\pdl.g4 by ANTLR 4.9.1
+// Generated from C:/Users/omerh/Desktop/GitHub/omerLanguage\pdl.g4 by ANTLR 4.9.1
 
 package parseTree;
 
@@ -102,6 +102,12 @@ public interface pdlVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIfElse(pdlParser.IfElseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link pdlParser#elseBlock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElseBlock(pdlParser.ElseBlockContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link pdlParser#value}.
 	 * @param ctx the parse tree

@@ -109,10 +109,6 @@ public class Main {
             // TODO: The parse tree can be a (valid) subset of an entire program.
             //      BUILDS SUBTREE BUT STILL STARTING FROM PROGRAM
 
-            //TODO: A range of valid programs can be transformed into valid outputs that can be executed.
-            //TODO: Code is clear and appropriate
-            //TODO: Correct structures are used
-            //TODO: Errors or edge-conditions are handled gracefully
 
             //=== is value and type in JS
 

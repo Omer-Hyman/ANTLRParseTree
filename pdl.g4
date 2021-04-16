@@ -71,9 +71,12 @@ whileLoop
 
 ifElse	: 'if' LPARENS IDENT comparator value RPARENS 'then'
 		  block*
-		  ('else'
-		  block*)?
-		  'endif' 
+		  elseBlock?
+		  'endif'
+		;
+
+elseBlock
+		: 'else' block
 		;
 
 value	: NUMBER | STRING | IDENT

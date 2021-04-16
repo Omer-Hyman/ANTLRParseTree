@@ -33,7 +33,6 @@ public class Tree extends JFrame {
         this.setSize(400,400);
         this.setLocationRelativeTo(null);
 
-
         //TODO: CHANGE LEAF ICONS
         //TODO: FIX TREE TO ONLY DISPLAY THE RIGHT CTX.GETTEXT()
 

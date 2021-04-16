@@ -14,44 +14,6 @@ proc hello
     endif
 endproc
 
-program hello2:
-    output ("anything mate", yanan)
-endprogram
-proc world
-    input (yanan)
-endproc
-
-program hello:
-endprogram
-proc world
-    input (yanan)
-endproc
-proc earth
-endproc
-
-program multiplyTwoNumbers:
-
-    global  number1, number2, product, time, positiveValue
-
-    output( "Enter the first number: ")
-    call getPositiveValue
-    set number1 to positiveValue
-    output( "Enter the second number: ")
-    call getPositiveValue
-    set number2 to positiveValue
-    call calculateProduct
-    output( "The product is: ", product)
-
-endprogram
-
-proc getPositiveValue
-    input( positiveValue)
-    while ( positiveValue < 0) do
-        output( "ERROR: Please enter a positive value: ")
-        input( positiveValue)
-    endwhile
-endproc
-
 proc calculateProduct
     set product to 0
     set time to 1
@@ -84,6 +46,47 @@ proc processOption
         endif
     endif
 endproc
+
+program multiplyTwoNumbers:
+
+    global  number1, number2, product, time, positiveValue
+
+    output( "Enter the first number: ")
+    call getPositiveValue
+    set number1 to positiveValue
+    output( "Enter the second number: ")
+    call getPositiveValue
+    set number2 to positiveValue
+    call calculateProduct
+    output( "The product is: ", product)
+
+endprogram
+
+
+program hello2:
+    output ("anything mate", yanan)
+endprogram
+proc world
+    input (yanan)
+endproc
+
+program hello:
+endprogram
+proc world
+    input (yanan)
+endproc
+proc earth
+endproc
+
+
+proc getPositiveValue
+    input( positiveValue)
+    while ( positiveValue < 0) do
+        output( "ERROR: Please enter a positive value: ")
+        input( positiveValue)
+    endwhile
+endproc
+
 
 
 
